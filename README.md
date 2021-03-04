@@ -10,7 +10,7 @@ Connect a digital output pin to the clock (`PD_SCK`) pin on the HX711, and an in
 
 Instantiate an `HX711` with the output pin, the input pin, and a pointer to a function that will be called when a new sample has been read. The callback function should accept a signed 32-bit integer. Note that the callback function runs in an interrupt context, so it's best to either set a global variable with the value or use an event queue when calling a slow or I/O-intensive function like `printf`. 
 
-Once the driver is instantiated, call its `start` method. Several milliseconds later your callback function should be called with a result. 
+Once the driver is instantiated, call its `start` method. Several milliseconds later your callback function should be called with a result, and will continue to be called every time that a new reading is taken (the sample rate is either 10 or 80 samples per second depending on the logic level of the chip's `RATE` pin). 
 
 To power down the chip and stop calling your callback, call the driver's `stop` method.
 
