@@ -22,7 +22,7 @@ Multiple instances of the driver can coexist, but each must have a dedicated clo
 
 ## Troubleshooting
 
-The `read` method adds a small delay between clock cycles to keep the pulse width comfortably above the [data sheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf)'s minimum value of 0.2µs. If you have a particularly fast processor, you may have to raise the delay values. With a slower processor you may be able to eliminate the delays.
+The `read` method adds a small delay between clock cycles to keep the pulse width comfortably above the [data sheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf)'s minimum value of 0.2µs. If you have a particularly fast processor, you may have to raise the delay values. With a slower processor (or if you like to live dangerously) you may be able to eliminate the delays.
 
 The clock and data lines are somewhat prone to interference from nearby digital signals. You may want to experiment with shielding, twisting, or physical distancing if you see the occasional spurious value. 
 
