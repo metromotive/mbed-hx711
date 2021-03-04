@@ -14,11 +14,16 @@ Once the driver is instantiated, call its `start` method. Several milliseconds l
 
 To power down the chip and stop calling your callback, call the driver's `stop` method.
 
-If you adjust the gain value, the driver will skip calling the callback function once until the new gain value has taken effect on the next read. 
+If you adjust the gain value, the driver will skip calling the callback function once until the new gain value has taken effect on the next read.
 
 ### Multiple HX711s
 
-Multiple instances of the driver can coexist, but each must have a dedicated clock and data pin. 
+Multiple instances of the driver can coexist, but each must have a dedicated clock and data pin (but see the note in the Troubleshooting section).
+
+## Troubleshooting
+
+The `read` method adds a small delay between clock cycles to keep the pulse width comfortably above the [data sheet](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf)'s minimum value of 0.2µs. If you have a particularly fast processor, you may have to raise the delay values. With a slower processor you may be able to eliminate the delays.
+
+The clock and data lines are somewhat prone to interference from nearby digital signals. You may want to experiment with shielding, twisting, or physical distancing if you see the occasional spurious value. 
 
 Some boards have an issue where interrupts are shared across pins in a way that's either a leaky abstraction or a bug. Specifically STM NUCLEO boards will need to use different pin *numbers* even if they are on different *ports*, and pins 0 and 1 (regardless of port) did not work for me at all. 
-
